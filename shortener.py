@@ -1,7 +1,9 @@
+import string
+
 class URL_shortener:
     def __init__(self):
         self.url_id = {}
-        self.id = 1000000
+        self.id = 10000000000
 
     def shorten_url(self, original_url):
         if original_url in self.url_id:
@@ -17,7 +19,7 @@ class URL_shortener:
         return "short_url.com/"+str(shorten_url)
 
     def encode(self, id):
-        characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        characters = string.digits + string.ascii_letters
         base62 = len(characters)
 
         ret = []
@@ -30,3 +32,4 @@ class URL_shortener:
 
 shortener = URL_shortener()
 print(shortener.shorten_url("https://www.youtube.com/watch?v=_28Kei8hhF0"))
+print(shortener.shorten_url("https://github.com/uyennguyen16900/Captain-Rainbow"))
