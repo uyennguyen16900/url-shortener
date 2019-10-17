@@ -13,6 +13,11 @@ urls = db.urls
 
 app = Flask(__name__)
 
+try:
+    URL = "http://127.0.0.1:5000/"
+except:
+    URL = "https://url-shortener-un.herokuapp.com/"
+
 @app.route('/')
 def index():
     """Show the home page"""
@@ -29,7 +34,7 @@ def return_shortened():
         'shortened_url': short_url
     }
     short_id = urls.insert_one(url).inserted_id
-    return render_template('result.html', url=url)
+    return render_template('result.html', url=url, URL=URL)
 
 @app.route('/<short_url>')
 def redirect_to_url(short_url):
