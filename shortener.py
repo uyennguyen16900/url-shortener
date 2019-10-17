@@ -1,9 +1,10 @@
 import string
+from random import randint
 
 class URL_shortener:
     def __init__(self):
         self.url_id = {}
-        self.id = 10000000000
+        self.id = 100000000
 
     def shorten_url(self, original_url):
         if original_url in self.url_id:
@@ -16,7 +17,7 @@ class URL_shortener:
             shorten_url = self.encode(self.id)
             self.id += 1
 
-        return "short_url.com/"+str(shorten_url)
+        return str(shorten_url)
 
     def encode(self, id):
         characters = string.digits + string.ascii_letters
@@ -30,6 +31,7 @@ class URL_shortener:
 
         return "".join(ret[::-1])
 
-shortener = URL_shortener()
-print(shortener.shorten_url("https://www.youtube.com/watch?v=_28Kei8hhF0"))
-print(shortener.shorten_url("https://github.com/uyennguyen16900/Captain-Rainbow"))
+if __name__ == "__main__":
+    shortener = URL_shortener()
+    print(shortener.shorten_url("https://www.youtube.com/watch?v=_28Kei8hhF0"))
+    print(shortener.shorten_url("https://github.com/uyennguyen16900/Captain-Rainbow"))
