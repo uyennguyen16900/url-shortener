@@ -4,7 +4,7 @@ from random import randint
 class URL_shortener:
     def __init__(self):
         self.url_id = {}
-        self.id = 100000000
+        self.id = randint(1, 100000000)
 
     def shorten_url(self, original_url):
         if original_url in self.url_id:
