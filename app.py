@@ -1,9 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for
-import sys
 from shortener import URL_shortener
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import redis
 import os
 
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/urlshortener')
@@ -13,10 +11,7 @@ urls = db.urls
 
 app = Flask(__name__)
 
-try:
-    URL = "http://127.0.0.1:5000/"
-except:
-    URL = "https://url-shortener-un.herokuapp.com/"
+URL = "http://127.0.0.1:5000/"
 
 @app.route('/')
 def index():
@@ -33,6 +28,10 @@ def return_shortened():
         'original_url': original_url,
         'shortened_url': short_url
     }
+    on_heroku = False
+    if 'YOUR_ENV_VAR' in os.environ:
+        on_heroku = True
+        URL = "https://url-shortener-un.herokuapp.com/"
     short_id = urls.insert_one(url).inserted_id
     return render_template('result.html', url=url, URL=URL)
 
