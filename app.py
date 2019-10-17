@@ -24,7 +24,6 @@ def return_shortened():
     url_shortener = URL_shortener()
     original_url = request.form['original_url']
     short_url = url_shortener.shorten_url(original_url)
-    print(short_url)
     url = {
         'original_url': original_url,
         'shortened_url': short_url
@@ -41,4 +40,4 @@ def redirect_to_url(short_url):
     return 'Not working'
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
