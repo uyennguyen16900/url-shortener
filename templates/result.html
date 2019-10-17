@@ -52,14 +52,17 @@
             <div class="field">
                <label class="label">New URL</label>
                <div class="control">
-                  <input class="input" type="text" name="url" value="http://127.0.0.1:5000/{{ url.shortened_url }}" id="myInput">
+                  <input style="margin-bottom:10px" class="input" type="text" name="url" value="http://127.0.0.1:5000/{{ url.shortened_url }}" id="myInput">
                   <div class="tooltip">
-                    <button style="margin-top:10px;width:100%" class="button is-dark" onclick="copyButton()" onmouseout="outFunc()">
+                    <button style="width:100%" class="button is-dark" onclick="copyButton()" onmouseout="outFunc()">
                       <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
                       Copy
                     </button>
                   </div>
-               </div>
+                  <form action="/{{ url.shortened_url }}" method="get" target="_blank">
+                    <button class="button is-light" type="subit" name="button">Open in New Window</button>
+                  </form>
+                </div>
             </div>
          </div>
       </section>
