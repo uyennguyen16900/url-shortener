@@ -28,9 +28,7 @@ def return_shortened():
         'original_url': original_url,
         'shortened_url': short_url
     }
-    on_heroku = False
-    if 'YOUR_ENV_VAR' in os.environ:
-        on_heroku = True
+    if 'DYNO' in os.environ:
         URL = "https://url-shortener-un.herokuapp.com/"
     short_id = urls.insert_one(url).inserted_id
     return render_template('result.html', url=url, URL=URL)
