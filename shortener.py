@@ -7,6 +7,7 @@ class URL_shortener:
         self.id = randint(1, 100000000)
 
     def shorten_url(self, original_url):
+        """Shorten the original url"""
         if original_url in self.url_id:
             self.id = self.url_id[original_url]
             shorten_url = self.encode(self.id)
@@ -18,6 +19,7 @@ class URL_shortener:
         return str(shorten_url)
 
     def encode(self, id):
+        """Generate string using base62"""
         characters = string.digits + string.ascii_letters
         base62 = len(characters)
 
