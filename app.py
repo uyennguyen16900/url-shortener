@@ -26,6 +26,7 @@ def return_shortened():
         'original_url': original_url,
         'shortened_url': short_url
     }
+    # Check if the code is running on heroku
     if 'DYNO' in os.environ:
         URL = "https://url-shortener-un.herokuapp.com/"
     else:

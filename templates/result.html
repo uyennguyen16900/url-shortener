@@ -1,86 +1,87 @@
 <!-- copy button from https://www.w3schools.com/howto/howto_js_copy_clipboard.asp -->
-
 {% extends 'base.html' %}
-
 {% block content %}
-      <style>
-        .tooltip {
-          position: relative;
-          display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-          visibility: hidden;
-          width: 140px;
-          background-color: #555;
-          color: #fff;
-          text-align: center;
-          border-radius: 6px;
-          padding: 5px;
-          position: absolute;
-          z-index: 1;
-          bottom: 150%;
-          left: 50%;
-          margin-left: -75px;
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-
-        .tooltip .tooltiptext::after {
-          content: "";
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          margin-left: -5px;
-          border-width: 5px;
-          border-style: solid;
-          border-color: #555 transparent transparent transparent;
-        }
-
-        .tooltip:hover .tooltiptext {
-          visibility: visible;
-          opacity: 1;
-        }
-      </style>
-      <section class="section">
-         <div style="position:fixed;top:30%;left:10%;width:80%" class="container">
-            <div class="field">
+<style>
+   .tooltip {
+   position: relative;
+   display: inline-block;
+   }
+   .tooltip .tooltiptext {
+   visibility: hidden;
+   width: 140px;
+   background-color: #555;
+   color: #fff;
+   text-align: center;
+   border-radius: 6px;
+   padding: 5px;
+   position: absolute;
+   z-index: 1;
+   bottom: 150%;
+   left: 50%;
+   margin-left: -75px;
+   opacity: 0;
+   transition: opacity 0.3s;
+   }
+   .tooltip .tooltiptext::after {
+   content: "";
+   position: absolute;
+   top: 100%;
+   left: 50%;
+   margin-left: -5px;
+   border-width: 5px;
+   border-style: solid;
+   border-color: #555 transparent transparent transparent;
+   }
+   .tooltip:hover .tooltiptext {
+   visibility: visible;
+   opacity: 1;
+   }
+</style>
+<section class="section">
+   <div style="position:fixed;top:30%;left:10%;width:80%" class="container">
+      <div class="field">
+         <div class="control">
+            <input class="input" type="text" name="url" value="{{ url.original_url }}">
+         </div>
+      </div>
+      <div class="field">
+         <label class="label">New URL</label>
+         <div class="field has-addons">
+            <div class="control is-expanded">
                <div class="control">
-                  <input class="input" type="text" name="url" value="{{ url.original_url }}">
+                  <input class="input" type="text" name="url" value="{{ URL }}{{ url.shortened_url }}" id="myInput">
                </div>
             </div>
-            <div class="field">
-               <label class="label">New URL</label>
-               <div class="control">
-                 <div class="InputAddOn">
-                   <input style="margin-bottom:10px" class="input InputAddOn-field" type="text" name="url" value="{{ URL }}{{ url.shortened_url }}" id="myInput">
-                     <div class="tooltip">
-                       <button style="width:100%;margin-bottom:10px" class="button is-dark InputAddOn-item" onclick="copyButton()" onmouseout="outFunc()">
-                         <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-                         Copy
-                       </button>
-                     </div>
-                 </div>
-                    <form action="/{{ url.shortened_url }}" method="get" target="_blank">
-                      <button class="button is-light" type="subit" name="button">Open in New Window</button>
-                    </form>
-                </div>
+            <div class="control">
+               <div class="tooltip">
+                  <span class="icon is-left">
+                  <button class="button is-dark" onclick="copyButton()" onmouseout="outFunc()">
+                  <span class="tooltiptext input-group-addon" id="myTooltip">Copy to clipboard</span>
+                  Copy
+                  </button>
+                  </span>
+               </div>
             </div>
          </div>
-      </section>
-      <script>
-      function copyButton() {
-        var copyText = document.getElementById("myInput");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        document.execCommand("copy");
-        var tooltip = document.getElementById("myTooltip");
-        tooltip.innerHTML = "Copied the URL";
-      }
+         <form action="/{{ url.shortened_url }}" method="get" target="_blank">
+            <button class="button is-text" type="subit" name="button">Open in New Window</button>
+         </form>
+      </div>
+   </div>
+</section>
+<script>
+   function copyButton() {
+     var copyText = document.getElementById("myInput");
+     copyText.select();
+     copyText.setSelectionRange(0, 99999);
+     document.execCommand("copy");
+     var tooltip = document.getElementById("myTooltip");
+     tooltip.innerHTML = "Copied the URL";
+   }
 
-      function outFunc() {
-        var tooltip = document.getElementById("myTooltip");
-        tooltip.innerHTML = "Copy to clipboard";
-      }
-      </script>
+   function outFunc() {
+     var tooltip = document.getElementById("myTooltip");
+     tooltip.innerHTML = "Copy to clipboard";
+   }
+</script>
 {% endblock %}

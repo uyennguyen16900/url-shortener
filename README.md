@@ -5,3 +5,6 @@ Simply give the url you want to shorten and get the new shortened url based on b
 
 ## Project
 Each url has a unique id in the database. We use this id and encode it using base62 encoding. This encoded string is stored as the short url for the original url.
+
+## Running on Heroku
+Here is the link to the app: :link:https://url-shortener-un.herokuapp.com
