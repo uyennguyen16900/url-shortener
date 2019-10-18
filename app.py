@@ -11,8 +11,6 @@ urls = db.urls
 
 app = Flask(__name__)
 
-URL = "http://127.0.0.1:5000/"
-
 @app.route('/')
 def index():
     """Show the home page"""
@@ -30,6 +28,8 @@ def return_shortened():
     }
     if 'DYNO' in os.environ:
         URL = "https://url-shortener-un.herokuapp.com/"
+    else:
+        URL = "http://127.0.0.1:5000/"
     short_id = urls.insert_one(url).inserted_id
     return render_template('result.html', url=url, URL=URL)
 
