@@ -10,12 +10,10 @@ class URL_shortener:
         if original_url in self.url_id:
             self.id = self.url_id[original_url]
             shorten_url = self.encode(self.id)
-            self.id += 1
 
         else:
             self.url_id[original_url] = self.id
             shorten_url = self.encode(self.id)
-            self.id += 1
 
         return str(shorten_url)
 
